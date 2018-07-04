@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import LectureGoalList from './components/LectureGoalList';
+import Timer from './components/Timer';
 import logo from './logo.svg';
 import './App.css';
 const goals = [
@@ -10,7 +11,7 @@ const goals = [
 
 class App extends Component {
   handleClick = e => {
-    debugger;
+    //debugger;
     console.log(this, e);
   };
   render() {
@@ -25,6 +26,7 @@ class App extends Component {
         </p>
 
         <LectureGoalList items={goals} title={'강의 목표!'} />
+        <Timer expireDate="2018-07-04T17:00:00+0900" />
       </div>
     );
   }
