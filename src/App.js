@@ -9,9 +9,10 @@ const goals = [
 ];
 
 class App extends Component {
-  handleClick(a) {
-    console.log(a);
-  }
+  handleClick = e => {
+    debugger;
+    console.log(this, e);
+  };
   render() {
     return (
       <div className="App">
