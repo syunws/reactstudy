@@ -8,13 +8,15 @@ const goals = [
   '개발 편의를 위한 VSCode IDE를 익힌다',
 ];
 
-
 class App extends Component {
+  handleClick(a) {
+    console.log(a);
+  }
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+          <img src={logo} className="App-logo" alt="logo" onClick={this.handleClick} />
           <h1 className="App-title">React</h1>
         </header>
         <p className="App-intro">
