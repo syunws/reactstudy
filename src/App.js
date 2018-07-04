@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import LectureGoalList from './components/LectureGoalList';
+import Todos from './components/Todos';
 import Timer from './components/Timer';
 import logo from './logo.svg';
 import './App.css';
+import 'antd/dist/antd.css';
+
 import moment from 'moment';
 const goals = [
-  'React 개발에 필요한 환경을 구축한다.',
-  '새로운 자바스트림트 문법을 익힌다',
-  '개발 편의를 위한 VSCode IDE를 익힌다',
+  { title: 'React 개발에 필요한 환경을 구축한다.', completed: true },
+  { title: '새로운 자바스트림트 문법을 익힌다', completed: false },
+  { title: '개발 편의를 위한 VSCode IDE를 익힌다', completed: false },
 ];
 
 class App extends Component {
@@ -40,7 +42,7 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
 
-        <LectureGoalList items={goals} title={'강의 목표!'} />
+        <Todos items={goals} title={'강의 목표!'} />
 
         {!isExpired && <Timer expireDate="2018-07-04T16:10:00+0900" onComplete={this.handleComplete} />}
       </div>
