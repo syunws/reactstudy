@@ -1,7 +1,17 @@
 .App {
   text-align: center;
-}
 
+  .wrap-todo {
+    position: relative;
+    width: 600px;
+    margin: 50px auto 20px auto;
+
+    @media screen and (max-width: 600px) {
+      width: 100%;
+      margin: 0;
+    }
+  }
+}
 .App-logo {
   height: 80px;
 }

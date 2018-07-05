@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Todos from './components/Todos';
-import Timer from './components/Timer';
-import AsyncState from './components/AsyncState';
+
 import logo from './logo.svg';
 import Header from './components/Header';
-import './App.css';
+import axios from 'axios';
+import './App.less';
 //import 'antd/dist/antd.css';
 
 const goals = [
@@ -15,9 +15,9 @@ const goals = [
 
 class App extends Component {
   state = {
-    counter: 0,
     isExpired: false,
     dateStr: '2018-07-05T17:00:00+0900',
+    data: [],
   };
 
   handleComplete = () => {
@@ -30,22 +30,35 @@ class App extends Component {
   render() {
     //const isExpired = moment('2018-07-04T17:00:00+0900') < moment();
     console.log('부모 render');
-    const { isExpired, dateStr } = this.state;
+    const { isExpired, dateStr, data } = this.state;
 
     return (
       <div className="App">
         <header className="App-header">
           <Header logo={logo} className="rotate" />
         </header>
-
-        <Todos items={goals} title={'강의 목표!'} />
-
+        <div className="wrap-todo">
+          <Todos items={goals} title={'강의 목표!'} />
+        </div>
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <AsyncState />
+
+        {data.map((item, idx) => {
+          return (
+            <li key={idx}>
+              <img src={item.show.image.medium} />
+            </li>
+          );
+        })}
       </div>
     );
+  }
+  componentDidMount() {
+    axios.get('http://api.tvmaze.com/search/shows?q=girls').then(({ data }) => {
+      // console.log(data);
+      this.setState({ data });
+    });
   }
 }
 
