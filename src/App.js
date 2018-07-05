@@ -15,7 +15,23 @@ const goals = [
 class App extends Component {
   state = {
     isExpired: false,
+    dateStr: '2018-07-05T17:00:00+0900',
   };
+
+constructor (props){
+  super(props);
+  //** lexical this - 1. function.bind 함수
+  //** this.handleClick = this.handleClick.bind(this);  // this 를 wrapping 한 자신을 다시 mapping
+}
+
+//** lexical this - 1. function.bind 함수
+/*
+  handleClick () {
+
+  }
+  */
+
+  //** lexical this 2. class-propertis 문법
   handleClick = e => {
     //debugger;
     console.log(this, e);
@@ -27,15 +43,25 @@ class App extends Component {
 
     this.setState({ isExpired: true });
   };
+
+  componentDidMount() {
+    setTimeout(() => {
+      console.log('state changed!');
+      this.setState({
+        dateStr: '2018-07-05T16:00:00+0900',
+      });
+    }, 5000);
+  }
   render() {
     //const isExpired = moment('2018-07-04T17:00:00+0900') < moment();
 
-    const { isExpired } = this.state;
+    const { isExpired, dateStr } = this.state;
 
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" onClick={this.handleClick} />
+            <!--//** lexical this 2. class-propertis 문법-->
+          <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">React</h1>
         </header>
         <p className="App-intro">
@@ -44,7 +70,7 @@ class App extends Component {
 
         <Todos items={goals} title={'강의 목표!'} />
 
-        {!isExpired && <Timer expireDate="2018-07-04T16:10:00+0900" onComplete={this.handleComplete} />}
+        {!isExpired && <Timer key={dateStr} expireDate={dateStr} onComplete={this.handleComplete} onClick={this.handleClick}/>}
       </div>
     );
   }

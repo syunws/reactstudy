@@ -8,12 +8,13 @@ const TIME_FORMAT = 'YYYYMMDD hh:mm'; //file scope 을 가질 수 있도록 wrap
 
 class Timer extends Component {
   constructor(props) {
-    //console.log(this.props); // this 없음
+    console.log('Constructor: 타이머 생성'); // this 없음
     super(props);
 
     console.log(this.props); // this 생성됨
     this.state = {
       date: moment(),
+      expireDate: props.expireDate,
     };
 
     this.nTimer = setInterval(() => {
@@ -30,6 +31,12 @@ class Timer extends Component {
   };
   */
 
+  static getDerivedStateFromProps(props, state) {
+    return {
+      expireDate: props.expireDate,
+    };
+  }
+
   shouldComponentUpdate(nextprops, nextState) {
     if (moment(this.props.expireDate) > this.state.date) {
       const prevDateStr = this.state.date.format(TIME_FORMAT);
@@ -41,8 +48,8 @@ class Timer extends Component {
 
   render() {
     console.log('render!');
-    const { expireDate, onComplete } = this.props;
-    const { date } = this.state;
+    const { onComplete } = this.props;
+    const { expireDate, date } = this.state;
     if (moment(expireDate) < date) {
       setTimeout(() => {
         onComplete && onComplete();
@@ -59,6 +66,7 @@ class Timer extends Component {
   }
 
   componentWillUnmount() {
+    console.log('componentWillUnmount : 타이머 언마운트');
     if (this.nTimer) {
       clearInterval(this.nTimer);
       this.nTimer = null;
