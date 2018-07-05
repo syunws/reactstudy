@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Todos from './components/Todos';
 import Timer from './components/Timer';
 import logo from './logo.svg';
+import Header from './components/Header';
 import './App.css';
 import 'antd/dist/antd.css';
 
@@ -61,8 +62,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">React</h1>
+          <Header logo={logo} className="rotate" />
         </header>
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
