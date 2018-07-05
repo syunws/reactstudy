@@ -5,7 +5,7 @@ import AsyncState from './components/AsyncState';
 import logo from './logo.svg';
 import Header from './components/Header';
 import './App.css';
-import 'antd/dist/antd.css';
+//import 'antd/dist/antd.css';
 
 const goals = [
   { title: 'React 개발에 필요한 환경을 구축한다.', completed: true },
@@ -37,6 +37,9 @@ class App extends Component {
         <header className="App-header">
           <Header logo={logo} className="rotate" />
         </header>
+
+        <Todos items={goals} title={'강의 목표!'} />
+
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
